@@ -10,8 +10,8 @@ n_batch = mnist.train.num_examples // batch_size
 x = tf.placeholder(dtype=tf.float32, shape=[None, 784], name='x')
 y = tf.placeholder(dtype=tf.float32, shape=[None, 10], name='y')
 
-w = tf.Variable(tf.random_normal([784, 10]))
-b = tf.Variable(tf.zeros([1, 10]))
+w = tf.Variable(tf.random_normal([784, 10]), name='w')
+b = tf.Variable(tf.zeros([1, 10]), name='b')
 z = tf.matmul(x, w) + b
 prediction = tf.nn.softmax(z, name='prediction')
 
