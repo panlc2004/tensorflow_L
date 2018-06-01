@@ -27,7 +27,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 with tf.Session() as sess:
     sess.run(init)
-    for epoch in range(21):
+    for epoch in range(50):
         for batch in range(n_batch):
             x_batch, y_batch = mnist.train.next_batch(batch_size)
             sess.run(train, feed_dict={x: x_batch, y: y_batch})
