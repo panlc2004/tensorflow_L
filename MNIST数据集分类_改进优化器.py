@@ -62,6 +62,8 @@ with tf.Session() as sess:
         sess.run(tf.assign(lr, 0.001 * (0.95 ** epoch)))
         for batch in range(n_batch):
             x_batch, y_batch = mnist.train.next_batch(batch_size)
+            print('x_batch.shape:', x_batch.shape)
+            print('y_batch.shape:', y_batch.shape)
             sess.run(train, feed_dict={x: x_batch, y: y_batch, keep_prob: 0.7})  # 设置keep_prob，缓解过拟合
 
         acc_test = sess.run(accuracy, feed_dict={x: mnist.test.images, y: mnist.test.labels, keep_prob: 1.0})
@@ -69,3 +71,4 @@ with tf.Session() as sess:
         learning_rate = sess.run(lr)
         print("Iter " + str(epoch) + ",Testing Accuracy " + str(acc_test) + ", Train Accuracy " +
               str(acc_train) + ", Learning Rate= " + str(learning_rate))
+

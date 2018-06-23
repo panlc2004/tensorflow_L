@@ -3,8 +3,8 @@ import tensorflow as tf
 
 mnist = input_data.read_data_sets("MNIST_data", one_hot=True)
 
-x = tf.placeholder(dtype=tf.float32, shape=[None, 784], name='x')
-y = tf.placeholder(dtype=tf.float32, shape=[None, 10], name='y')
+# x = tf.placeholder(dtype=tf.float32, shape=[None, 784], name='x')
+# y = tf.placeholder(dtype=tf.float32, shape=[None, 10], name='y')
 
 g = tf.Graph()
 output_graph_path = 'pb/test/expert-graph.pb'
