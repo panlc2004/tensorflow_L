@@ -24,11 +24,18 @@ def block35(net, scale=1.0, activation_fn=tf.nn.relu, scope=None, reuse=None):
     return net, tower_conv
 
 
+s = tf.get_variable_scope()
+print(s)
+
 net = tf.placeholder(tf.float32, [None, 299, 299, 3])
 with tf.variable_scope('test') as scope1:
-    b,c = block35(net, scope=scope1)
-    # with tf.variable_scope('test') as scope1:
-    b1,c1 = block35(net, scope=scope1, reuse=True)
+    with tf.name_scope('n1') as scope:
+        print('scopel: ', scope1)
+        b, c = block35(net, scope=scope1)
+with tf.variable_scope('test') as scope2:
+    with tf.name_scope('n2') as scope:
+        print('scope2: ', scope2)
+        b1, c1 = block35(net, scope=scope2)
 print(b)
 print(b1)
 print(b == b1)
