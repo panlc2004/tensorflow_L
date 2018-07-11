@@ -9,6 +9,7 @@ with tf.variable_scope('v_scope') as scope1:
     with tf.variable_scope('v_scope_inner'):
         weights1_inner = tf.get_variable('weights', shape=[4, 5])
 
+print(tf.get_variable('v_scope/weights'), shape=[2, 3])
 print(weights1.name)
 print(weights1.shape)
 print(weights1_inner.name)

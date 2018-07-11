@@ -41,3 +41,5 @@ with tf.Session() as sess:
         print("epoch: ", epoch, " accuracy: ", acc)
 
     saver.save(sess, 'net/model_saver', global_step=20)
+
+
