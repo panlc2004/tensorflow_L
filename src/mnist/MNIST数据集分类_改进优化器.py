@@ -30,17 +30,23 @@ z2 = tf.matmul(a1_drop, W2) + b2
 a2 = tf.nn.relu(z2)
 a2_drop = tf.nn.dropout(a2, keep_prob=keep_prob)
 
-W3 = tf.Variable(tf.truncated_normal([300, 250], stddev=0.1))
-b3 = tf.Variable(tf.zeros([250]) + 0.1)
+W3 = tf.Variable(tf.truncated_normal([300, 128], stddev=0.1))
+b3 = tf.Variable(tf.zeros([128]) + 0.1)
 z3 = tf.matmul(a2_drop, W3) + b3
 a3 = tf.nn.relu(z3)
 a3_drop = tf.nn.dropout(a3, keep_prob=keep_prob)
 
-W4 = tf.Variable(tf.truncated_normal([250, 10], stddev=0.1))
-b4 = tf.Variable(tf.zeros([10]) + 0.1)
-z4 = tf.matmul(a3_drop, W4) + b4
-a4 = tf.nn.softmax(z4)
-prediction = tf.nn.dropout(a4, keep_prob=keep_prob)
+# W4 = tf.Variable(tf.truncated_normal([250, 100], stddev=0.1))
+# b4 = tf.Variable(tf.zeros([100]) + 0.1)
+# z4 = tf.matmul(a3_drop, W4) + b4
+# a4 = tf.nn.relu(z4)
+# a4_drop = tf.nn.dropout(a4, keep_prob=keep_prob)
+
+W5 = tf.Variable(tf.truncated_normal([128, 10], stddev=0.1))
+b5 = tf.Variable(tf.zeros([10]) + 0.1)
+z5 = tf.matmul(a3_drop, W5) + b5
+a5 = tf.nn.softmax(z5)
+prediction = tf.nn.dropout(a5, keep_prob=keep_prob)
 
 # 二阶损失函数
 loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=prediction))
@@ -62,8 +68,8 @@ with tf.Session() as sess:
         sess.run(tf.assign(lr, 0.001 * (0.95 ** epoch)))
         for batch in range(n_batch):
             x_batch, y_batch = mnist.train.next_batch(batch_size)
-            print('x_batch.shape:', x_batch.shape)
-            print('y_batch.shape:', y_batch.shape)
+            # print('x_batch.shape:', x_batch.shape)
+            # print('y_batch.shape:', y_batch.shape)
             sess.run(train, feed_dict={x: x_batch, y: y_batch, keep_prob: 0.7})  # 设置keep_prob，缓解过拟合
 
         acc_test = sess.run(accuracy, feed_dict={x: mnist.test.images, y: mnist.test.labels, keep_prob: 1.0})

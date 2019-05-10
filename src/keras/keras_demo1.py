@@ -45,7 +45,7 @@ Y_train = (numpy.arange(10) == y_train[:, None]).astype(int)
 Y_test = (numpy.arange(10) == y_test[:, None]).astype(int)
 
 model.fit(X_train, Y_train, batch_size=200, epochs=50, shuffle=True, verbose=0, validation_split=0.3)
-model.evaluate(X_test, Y_test, batch_size=200, verbose=0)
+# model.evaluate(X_test, Y_test, batch_size=200, verbose=0)
 
 '''
     第五步：输出
