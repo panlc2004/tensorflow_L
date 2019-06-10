@@ -6,18 +6,25 @@ y = [1.1, 2.1, 3.1, 4.1, 5.1, 6.1]
 
 
 def _parsh(x, y):
-    return x + 1, y + 1
+    return x, y
 
-def _apply(key_func, reduce_func, window_size):
-    return x
+
+def _apply(dataset):
+    print('=========_apply=========')
+    # x = [1.7, 2.7, 3.7, 4.7, 5.7, 6.7]
+    # y = [1.1, 2.1, 3.1, 4.1, 5.1, 6.1]
+    # dataset = tf.data.Dataset.from_tensor_slices((x, y))
+    # dataset = dataset.map(_parsh, 4).repeat()
+    return dataset
+
 
 dataset = tf.data.Dataset.from_tensor_slices((x, y))
-dataset = dataset.map(_parsh, 4).apply(_apply)
+dataset = dataset.map(_parsh, 4).apply(_apply).repeat()
 iterator = dataset.make_one_shot_iterator()
 data = iterator.get_next()
 
 with tf.Session() as sess:
-    for i in range(6):
-        print('i:', i)
+    for i in range(9):
+        # print('i:', i)
         s = sess.run(data)
         print(s)
